@@ -1,0 +1,20 @@
+services:
+  frontend-service:
+    build: ./frontend-service
+
+  backend-service:
+    build: ./backend-service
+
+  flask-service:
+    build: ./flask-service
+
+  gateway:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - frontend-service
+      - backend-service
+      - flask-service
