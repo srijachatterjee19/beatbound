@@ -4,8 +4,6 @@ const client = require("prom-client");
 
 const app = express();
 
-const client = require("prom-client");
-
 // custom counter
 const requestCounter = new client.Counter({
     name: "http_requests_total",
@@ -35,7 +33,7 @@ app.get("/metrics", async (req, res) => {
     res.set("Content-Type", client.register.contentType);
     res.end(await client.register.metrics());
   });
-  
+
 app.listen(5000, () => {
   console.log("Node service running on 5000");
 });
